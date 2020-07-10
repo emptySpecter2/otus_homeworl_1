@@ -14,4 +14,7 @@ deploy:
   file: "/home/travis/build/emptySpecter2/otus_homeworl_1/helloworld-0.0.1-Linux.deb"
   skip_cleanup: true
   on:
-    tags: true
+    tags: false
+  branches:
+    only:
+    - master
