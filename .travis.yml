@@ -7,15 +7,10 @@ script:
 - cmake .
 - cmake --build .
 - cmake --build . --target test
-- cmake --build . --target package
+- cmake --build . --target package	
 deploy:
-  provider: releases
-  api_key: "6c94490d660457c118b108e97319d5db4e44154f"
-  file: "/home/travis/build/emptySpecter2/otus_homeworl_1/helloworld-0.0.1-Linux.deb"
+  provider: script
   skip_cleanup: true
-  on:
-    tags: false
-    all_branches: true
-  branches:
-    only:
-    - master
+  script:
+  - curl -T homework-0.0.$TRAVIS_BUILD_NUMBER-Linux.deb -emtpySpecter2:$BINTRAY_API_KEY "https://api.bintray.com/content/empty/otus/package_otus/$TRAVIS_BUILD_NUMBER/homework-0.0.$TRAVIS_BUILD_NUMBER-Linux.deb;deb_distribution=trusty;deb_component=main;deb_architecture=amd64;publish=1"
+
